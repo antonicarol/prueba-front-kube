@@ -1,7 +1,7 @@
 import React from "react";
 import tw from "tailwind-styled-components";
 
-export const Button = ({ children, onClick, disabled }) => {
+export const ActivateButton = ({ children, onClick, disabled }) => {
   return (
     <>
       {!disabled ? (
@@ -18,9 +18,10 @@ export const Button = ({ children, onClick, disabled }) => {
 };
 
 const ActiveButton = tw.button`
-    bg-gradient-to-r from-blue-500 to-sky-400 text-white px-10 py-2 rounded-xl
+bg-white text-black px-10 py-2 rounded-xl shadow-md border
+
 `;
 
 const DisabledButton = tw.button`
-    bg-white text-gray-300 px-10 py-2 rounded-xl shadow-md border cursor-not-allowed
+bg-gradient-to-r from-blue-500 to-sky-400 text-white px-10 py-2 rounded-xl  cursor-not-allowed
 `;

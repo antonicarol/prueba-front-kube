@@ -5,6 +5,7 @@ import logo from "./assets/react-logo.png";
 import { useApi } from "./hooks/useApi";
 import { Button } from "./components/Button";
 import { UserCard } from "./components/UserCard";
+import { ActivateButton } from "./components/ActivateButton";
 
 function App() {
   const { getUserData } = useApi();
@@ -34,13 +35,13 @@ function App() {
   return (
     <AppContainer>
       <ButtonsContainer>
-        <Button disabled={!disabled} onClick={activateSendButton}>
+        <ActivateButton disabled={!disabled} onClick={activateSendButton}>
           Active
-        </Button>
+        </ActivateButton>
         <Separator></Separator>
-        <Button disabled={disabled} onClick={deactivateSendButton}>
+        <ActivateButton disabled={disabled} onClick={deactivateSendButton}>
           Incative
-        </Button>
+        </ActivateButton>
       </ButtonsContainer>
       <ActionContainer>
         <img src={logo} width={250} alt="React Logo" />
@@ -51,6 +52,11 @@ function App() {
           </Button>
         </FormContainer>
       </ActionContainer>
+      <ResultsContainer>
+        {userResults.map((user) => {
+          return <UserCard key={Math.random(1, 999) * 1000} userData={user} />;
+        })}
+      </ResultsContainer>
     </AppContainer>
   );
 }
@@ -69,7 +75,7 @@ const Separator = tw.div`
   w-[1px] border h-full
 `;
 const ActionContainer = tw.div`
-  flex flex-col items-center gap-10 justify-evenly sm:flex-row-reverse w-[75vw] border-2 rounded-xl p-10 shadow-md
+  flex flex-col items-center gap-10 justify-evenly md:flex-row-reverse w-[75vw] lg:w-[50vw] border-2 rounded-xl p-10 shadow-md
 `;
 
 const FormContainer = tw.div`
@@ -78,3 +84,7 @@ const FormContainer = tw.div`
 
 const NameInput = tw.input`
 border-2 rounded-md w-[225px] h-[33px]`;
+
+const ResultsContainer = tw.div`
+  flex flex-wrap w-[75vw] gap-4 justify-center
+`;
