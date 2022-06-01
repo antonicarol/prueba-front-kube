@@ -11,10 +11,15 @@ function App() {
   const { getUserData } = useApi();
   const [disabled, setDisabled] = useState(false);
   const [name, setName] = useState("");
+  const [error, setError] = useState(false);
   const [userResults, setUserResults] = useState([]);
 
+  const handleInputChange = (value) => {
+    setError(false);
+    setName(value);
+  };
+
   const createNewUser = async () => {
-    console.log(name);
     if (name !== "") {
       const reqUserData = await getUserData();
       const newUser = {
@@ -22,6 +27,8 @@ function App() {
         name: name,
       };
       setUserResults([...userResults, newUser]);
+    } else {
+      setError(true);
     }
   };
 
@@ -46,11 +53,15 @@ function App() {
       <ActionContainer>
         <img src={logo} width={250} alt="React Logo" />
         <FormContainer>
-          <NameInput
-            aria-label="name-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <div className="flex flex-col gap-2 items-center">
+            <NameInput
+              aria-label="name-input"
+              value={name}
+              onChange={(e) => handleInputChange(e.target.value)}
+            />
+            {error && <ErrorMesssage>Introduce un nombre!</ErrorMesssage>}
+          </div>
+
           <Button
             _id="send-button"
             disabled={disabled}
@@ -91,8 +102,11 @@ const FormContainer = tw.div`
 `;
 
 const NameInput = tw.input`
-border-2 rounded-md w-[225px] h-[33px]`;
+border-2 rounded-md w-[225px] h-[33px] p-2`;
 
+const ErrorMesssage = tw.i`
+  text-red-600
+`;
 const ResultsContainer = tw.div`
   flex flex-wrap w-[75vw] gap-4 justify-center
 `;
