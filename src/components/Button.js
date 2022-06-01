@@ -1,15 +1,15 @@
 import React from "react";
 import tw from "tailwind-styled-components";
 
-export const Button = ({ children, onClick, disabled }) => {
+export const Button = ({ _id, children, onClick, disabled }) => {
   return (
     <>
       {!disabled ? (
-        <ActiveButton onClick={onClick} disabled={disabled}>
+        <ActiveButton data-testid={_id} onClick={onClick} disabled={disabled}>
           {children}
         </ActiveButton>
       ) : (
-        <DisabledButton onClick={onClick} disabled={disabled}>
+        <DisabledButton data-testid={_id} onClick={onClick} disabled={disabled}>
           {children}
         </DisabledButton>
       )}

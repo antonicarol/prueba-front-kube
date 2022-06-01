@@ -40,14 +40,22 @@ function App() {
         </ActivateButton>
         <Separator></Separator>
         <ActivateButton disabled={disabled} onClick={deactivateSendButton}>
-          Incative
+          Inactive
         </ActivateButton>
       </ButtonsContainer>
       <ActionContainer>
         <img src={logo} width={250} alt="React Logo" />
         <FormContainer>
-          <NameInput value={name} onChange={(e) => setName(e.target.value)} />
-          <Button disabled={disabled} onClick={() => createNewUser()}>
+          <NameInput
+            aria-label="name-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Button
+            _id="send-button"
+            disabled={disabled}
+            onClick={() => createNewUser()}
+          >
             <b>ENVIAR</b>
           </Button>
         </FormContainer>
