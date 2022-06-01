@@ -80,6 +80,5 @@ test("Error when leaving the input blank", async () => {
   const errorMessage = screen.getByTestId("error-message");
 
   expect(errorMessage).toBeInTheDocument();
-  console.log();
   expect(errorMessage.innerHTML).toBe("Introduce un nombre");
 });

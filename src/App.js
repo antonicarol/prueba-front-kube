@@ -59,9 +59,14 @@ function App() {
         </ActivateButton>
       </ButtonsContainer>
       <ActionContainer>
-        <img src={logo} width={250} alt="React Logo" />
+        <img
+          src={logo}
+          width={250}
+          alt="React Logo"
+          className="object-contain"
+        />
         <FormContainer>
-          <div className="flex flex-col gap-2 items-center">
+          <InputContainer>
             <NameInput
               aria-label="name-input"
               value={name}
@@ -72,8 +77,7 @@ function App() {
                 {errorMessage}
               </ErrorMesssage>
             )}
-          </div>
-
+          </InputContainer>
           <Button
             _id="send-button"
             disabled={disabled}
@@ -98,6 +102,9 @@ const AppContainer = tw.div`
 flex flex-col gap-10 items-center  w-screen h-screen
 `;
 
+const InputContainer = tw.div`
+flex flex-col gap-2 items-center
+`;
 const ButtonsContainer = tw.div`
   flex items-center justify-center w-full gap-5 mt-10
 `;
@@ -114,7 +121,7 @@ const FormContainer = tw.div`
 `;
 
 const NameInput = tw.input`
-border-2 rounded-md w-[225px] h-[33px] p-2`;
+border-2 rounded-md w-[175px] sm:w-[225px]  h-[33px] p-2`;
 
 const ErrorMesssage = tw.i`
   text-red-600
