@@ -64,3 +64,22 @@ test("Renders User Card, with the input value", async () => {
   expect(nameContainer).toBeInTheDocument();
   expect(phoneContainer).toBeInTheDocument();
 });
+
+test("Error when leaving the input blank", async () => {
+  const { input } = inputSetup();
+  fireEvent.change(input, { target: { value: "" } });
+  expect(input.value).toBe("");
+
+  const sendButton = screen.getByText("ENVIAR");
+
+  expect(sendButton).toBeInTheDocument();
+  expect(sendButton).not.toBeDisabled();
+
+  fireEvent.click(sendButton);
+
+  const errorMessage = screen.getByTestId("error-message");
+
+  expect(errorMessage).toBeInTheDocument();
+  console.log();
+  expect(errorMessage.innerHTML).toBe("Introduce un nombre");
+});

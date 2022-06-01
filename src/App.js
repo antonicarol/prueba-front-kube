@@ -11,24 +11,32 @@ function App() {
   const { getUserData } = useApi();
   const [disabled, setDisabled] = useState(false);
   const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState(false);
   const [userResults, setUserResults] = useState([]);
 
   const handleInputChange = (value) => {
     setError(false);
+    setErrorMessage("");
     setName(value);
   };
 
   const createNewUser = async () => {
-    if (name !== "") {
-      const reqUserData = await getUserData();
-      const newUser = {
-        ...reqUserData,
-        name: name,
-      };
-      setUserResults([...userResults, newUser]);
-    } else {
+    try {
+      if (name !== "") {
+        const reqUserData = await getUserData();
+        const newUser = {
+          ...reqUserData,
+          name: name,
+        };
+        setUserResults([...userResults, newUser]);
+      } else {
+        setError(true);
+        setErrorMessage("Introduce un nombre");
+      }
+    } catch (e) {
       setError(true);
+      setErrorMessage("Error con el servicio Web");
     }
   };
 
@@ -59,7 +67,11 @@ function App() {
               value={name}
               onChange={(e) => handleInputChange(e.target.value)}
             />
-            {error && <ErrorMesssage>Introduce un nombre!</ErrorMesssage>}
+            {error && (
+              <ErrorMesssage data-testid="error-message">
+                {errorMessage}
+              </ErrorMesssage>
+            )}
           </div>
 
           <Button
